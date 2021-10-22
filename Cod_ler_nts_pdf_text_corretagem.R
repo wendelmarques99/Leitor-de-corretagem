@@ -72,7 +72,7 @@ read_function <- function(x){
     
       # Padrao regex para operacoes ---------------------------------------------
       
-      padrao_temp <- paste0("(?<=", "VIS|OPC|OPV", " ).+?(?= [0-9]+ [0-9]+,)")
+      padrao_temp <- paste0("(?<=", "VIS|OPC|OPV|TER", " ).+?(?= [0-9]+ [0-9]+,)")
        
     
       # string padrao operacoes -------------------------------------------------
@@ -147,8 +147,7 @@ read_function <- function(x){
                valor_liquido_operacoes = valor_liquido_operacoes,
                custos_extras = custos_extras,
                ativos = ativo) %>% 
-        
-        mutate(exercicio = if_else(str_detect(ativo, "E$"), "Sim", "Nao"))
+        select(-c(Praca, `D/C`))
       
       
       return(df_output)
